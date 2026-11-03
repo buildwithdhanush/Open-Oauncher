@@ -1,0 +1,151 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.opendeck.launcher">
+
+    <!-- Required for Home role: FR-HOME-001, FR-HOME-002 -->
+    <application
+        android:allowTaskReparenting="true"
+        android:appCategory="home"
+        android:enableFloatingMargins="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/launcher_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:allowNativeHeapPointerTagging="true"
+        android:extractNativeLibs="true"
+        android:hardwareAccelerated="true"
+        android:persistableMode="persist_mode_complete"
+        android:process=":main"
+        android:vmSafeMode="false"
+        android:isGame="false"
+        android:killAfter="true"
+        android:manageSpaceActivity="android.settings.MANAGE_APPLICATION_STORAGE_SETTINGS"
+        android:manageSpaceActivityBroadcast="false"
+        android:description="@string/launcher_name">
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <meta-data
+            android:name="androidx.appcompat.enable"
+            android:value="true" />
+
+        <meta-data
+            android:name="androidx.lifecycle.enabled"
+            android:value="true" />
+
+        <!-- Home activity: FR-HOME-001, FR-HOME-002 -->
+        <!-- Declares ACTION_MAIN + CATEGORY_HOME + CATEGORY_DEFAULT for Home role -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!-- Launcher entry: FR-HOME-002 - allows user to open setup before selecting as Home -->
+        <activity
+            android:name=".setup.SetupActivity"
+            android:exported="true"
+            android:label="@string/setup_title">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Default-Home onboarding: FR-HOME-003 -->
+        <activity
+            android:name=".onboarding.OnboardingActivity"
+            android:exported="true"
+            android:theme="@style/Theme.OpenDeck.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Workspace edit mode -->
+        <activity
+            android:name=".workspace.WorkspaceEditActivity"
+            android:exported="false"
+            android:label="@string/edit_mode_title" />
+
+        <!-- Settings -->
+        <activity
+            android:name=".settings.SettingsActivity"
+            android:exported="false"
+            android:label="@string/settings_title" />
+
+        <!-- Feature: App discovery and drawer -->
+        <activity
+            android:name=".drawer.AppDrawerActivity"
+            android:exported="false"
+            android:label="@string/app_drawer_title" />
+
+        <!-- Feature: Folder editor -->
+        <activity
+            android:name=".folder.FolderEditActivity"
+            android:exported="false"
+            android:label="@string/folder_edit_title" />
+
+        <!-- Feature: Item editor -->
+        <activity
+            android:name=".item.ItemEditActivity"
+            android:exported="false"
+            android:label="@string/item_edit_title" />
+
+        <!-- Feature: Theme selection -->
+        <activity
+            android:name=".theme.ThemeSelectActivity"
+            android:exported="false"
+            android:label="@string/theme_select_title" />
+
+        <!-- Feature: Gestures and actions -->
+        <activity
+            android:name=".actions.ActionsActivity"
+            android:exported="false"
+            android:label="@string/actions_title" />
+
+        <!-- Feature: Backup and restore -->
+        <activity
+            android:name=".backup.BackupRestoreActivity"
+            android:exported="false"
+            android:label="@string/backup_restore_title" />
+
+        <!-- Widget hosting receivers -->
+        <receiver
+            android:name="androidx.appwidget.AppWidgetHostReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.bind" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name="androidx.appwidget.AppWidgetProvider"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_ENABLED" />
+                <action android:name="android.appwidget.action.APPWIDGET_DELETED" />
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+        </receiver>
+
+    </application>
+
+    <!-- Query all packages for app discovery: FR-APP-001 -->
+    <!-- Using package visibility queries instead of QUERY_ALL_PACKAGES where possible -->
+    <queries>
+        <intent>
+            action="android.intent.action.MAIN"
+            category="android.intent.category.LAUNCHER"
+        </intent>
+        <package android:name="com.android.chrome" />
+    </queries>
+
+</manifest>

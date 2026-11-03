@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Color definitions for OpenDeck Launcher -->
+
+    <!-- Primary colors -->
+    <color name="primary_dark">#212121</color>
+    <color name="primary_dark_variant">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="teal_200">#B3E5FC</color>
+    <color name="teal_700">#00695C</color>
+
+    <!-- Text colors -->
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#757575</color>
+    <color name="text_hint">#9E9E9E</color>
+
+    <!-- Divider and separator colors -->
+    <color name="divider">#B0B0B0</color>
+
+    <!-- Background colors -->
+    <color name="color_background">#FAFAFA</color>
+    <color name="color_floating">#FFFFFF</color>
+
+    <!-- Disabled and error states -->
+    <color name="disabled_color">#BDBDBD</color>
+    <color name="error_color">#CF6679</color>
+
+</resources>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Launcher name used in label -->
+    <string name="launcher_name">OpenLauncher</string>
+
+    <!-- Blank workspace message -->
+    <string name="blank_workspace">Blank Workspace</string>
+
+    <!-- Setup title -->
+    <string name="setup_title">OpenLauncher</string>
+
+    <!-- Onboarding content -->
+    <string name="onboarding_welcome">Welcome to OpenLauncher</string>
+    <string name="onboarding_description">Your personal Android workspace builder. Create home pages, add apps, widgets, and customize your layout.</string>
+    <string name="onboarding_choose_home">Select OpenLauncher as your default Home application to start customizing.</string>
+    <string name="onboarding_skip">Skip</string>
+    <string name="onboarding_choose">Choose as Default Home</string>
+
+    <!-- Edit mode -->
+    <string name="edit_mode_title">Edit Mode</string>
+    <string name="done">Done</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+
+    <!-- App drawer -->
+    <string name="app_drawer_title">App Drawer</string>
+
+    <!-- Folder edit -->
+    <string name="folder_edit_title">Folder Edit</string>
+
+    <!-- Item edit -->
+    <string name="item_edit_title">Item Edit</string>
+
+    <!-- Theme select -->
+    <string name="theme_select_title">Themes</string>
+
+    <!-- Actions -->
+    <string name="actions_title">Gestures and Actions</string>
+
+    <!-- Backup and Restore -->
+    <string name="backup_restore_title">Backup and Restore</string>
+
+</resources>
