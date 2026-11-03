@@ -27,17 +27,11 @@ jobs:
           java-version: 17
           cache: gradle
 
-      - name: Accept Android licenses
-        run: |
-          echo "y" | $ANDROID_HOME/cmds/sdkmanager --licenses 2>/dev/null || true
-
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
         with:
-          api-levels: "34"
-          platform-tools: true
-          build-tools: "34.0.0"
-          components: "build-tools;34.0.0"
+          license: "true"
+          packages: "platform-tools,platforms;android-34,build-tools;34.0.0"
 
       - name: Cache Gradle wrapper
         uses: actions/cache@v4
@@ -69,21 +63,21 @@ jobs:
         run: ./gradlew lint --no-daemon --xml
 
       - name: Upload APK artifact
-        if: always()
+        if: always() && success()
         uses: actions/upload-artifact@v4
         with:
           name: debug-apk
           path: app/build/outputs/apk/debug/*.apk
 
       - name: Upload Lint results
-        if: always()
+        if: always() && success()
         uses: actions/upload-artifact@v4
         with:
           name: lint-results
           path: app/build/reports/lint/*.xml
 
       - name: Upload test results
-        if: always()
+        if: always() && success()
         uses: actions/upload-artifact@v4
         with:
           name: test-results
@@ -101,11 +95,11 @@ jobs:
           distribution: temurin
           java-version: 17
           cache: gradle
-      - uses: actions/setup-android@v3
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
         with:
-          api-levels: "34"
-          platform-tools: true
-          build-tools: "34.0.0"
+          license: "true"
+          packages: "platform-tools,platforms;android-34,build-tools;34.0.0"
       - run: chmod +x gradlew
       - run: ./gradlew lint --no-daemon
 
@@ -121,10 +115,18 @@ jobs:
           distribution: temurin
           java-version: 17
           cache: gradle
-      - uses: actions/setup-android@v3
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
         with:
-          api-levels: "34"
-          platform-tools: true
-          build-tools: "34.0.0"
+          license: "true"
+          packages: "platform-tools,platforms;android-34,build-tools;34.0.0"
       - run: chmod +x gradlew
-      # Instrumentation tests require a configured Android emulator
+      - name: Run instrumentation tests
+        run: ./gradlew connectedAndroidTest --no-daemon
+        if: runner.os == 'Linux' && env.ANDROID_DEVICE_CONNECTED != 'false'
+      - name: Upload test results
+        if: always() && success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: app/build/reports/tests/
